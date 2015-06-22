@@ -1,0 +1,7 @@
+<launch>
+        
+    <!--<node name="rviz" pkg="rviz" type="rviz" />-->
+    <node name="wheel_odometry_publisher" pkg="wheel_odom" type="wheel_odometry.py" output="screen">
+        <param name="port" type="str" value="/dev/ttyACM0"/>
+    </node>
+</launch>

@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "wheel_odom")
+set(wheel_odom_MAINTAINER "rbtying <rbtying@todo.todo>")
+set(wheel_odom_DEPRECATED "")
+set(wheel_odom_VERSION "0.0.0")
+set(wheel_odom_BUILD_DEPENDS )
+set(wheel_odom_RUN_DEPENDS )
+set(wheel_odom_BUILDTOOL_DEPENDS "catkin")
