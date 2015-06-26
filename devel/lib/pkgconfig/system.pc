@@ -1,0 +1,8 @@
+prefix=/home/rbtying/wchair/devel
+
+Name: system
+Description: Description of system
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rbtying/wchair/devel/lib 
+Requires: 

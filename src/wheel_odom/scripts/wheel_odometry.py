@@ -70,8 +70,8 @@ def update_robot_state():
 	global x
 	global y
 
-	threading.Timer(1, update_robot_state).start()
-    
+	threading.Timer(0.5, update_robot_state).start()
+	
 	# Number of revolutions in dt (time step)
 	d_right_revs = right_rev_count - last_right_rev_count 
 	d_left_revs = left_rev_count - last_left_rev_count
@@ -95,44 +95,20 @@ def update_robot_state():
 
 	# update system	
 	last_right_rev_count = right_rev_count
- 	last_left_rev_count = left_rev_count	
+	last_left_rev_count = left_rev_count	
 
 
 def publish_state():
-    global x
-    global y
-    global theta
-    #rospy.loginfo(x)
-    #rospy.loginfo(y)
+	global x
+	global y 
+	global theta 
+	# Set up topic to be published
+	pub = rospy.Publisher("wheel_odometry", PoseStamped, queue_size=100)
+	rospy.init_node("wheel_odometry_publisher", anonymous=True)
+	rate = rospy.Rate(2) # Units in Hz
 
-    pub = rospy.Publisher("wheel_odometry", PoseStamped, queue_size=100)
-    rospy.init_node("wheel_odometry_publisher", anonymous=True)
-    rate = rospy.Rate(5) # Units in Hz
-    while not rospy.is_shutdown():
-        position = PoseStamped()
-        position.header.stamp = rospy.get_rostime()
-        position.header.frame_id = "base_link"
-        position.pose.position.x = x
-        position.pose.position.y = y
-        position.pose.position.z = 0    
-
-        quaternion = tf.transformations.quaternion_from_euler(0, 0, theta)
-        position.pose.orientation = quaternion
-        
-        pub.publish(position)
-
-        rate.sleep()
-    
-	return True
-
-def main():
-    # Update robot state (x,y,theta)
-	update_robot_state()
-    # Publish robot state in ROS system
-	#publish_state()
-
-    # Constantly receive wheel odometry data from Arduino 
-	while True:
+	while not rospy.is_shutdown():
+		# Constantly receive wheel odometry data from Arduino 
 		raw_vals = ser.readline()
 		wheel, stripes = parse_vals(raw_vals)
 			
@@ -142,13 +118,46 @@ def main():
 		if wheel ==  "left":
 			left_rev_count = stripes/8.0
 
+		# Prepare position message to be sent in topic
+		position = PoseStamped()
+		position.header.stamp = rospy.get_rostime()
+		position.header.frame_id = "base_link"
+		position.pose.position.x = x
+		position.pose.position.y = y
+		position.pose.position.z = 0    
+
+		quaternion = tf.transformations.quaternion_from_euler(0, 0, theta)
+		position.pose.orientation = quaternion
+		
+		pub.publish(position)
+		print x,y
+		rate.sleep()
+	
+	return True
+
+def main():
+	# Update robot state (x,y,theta), launches separate threads
+	update_robot_state()
+	# Publish robot state in ROS system
+	publish_state()
+	
+	"""
+	# Constantly receive wheel odometry data from Arduino 
+	while True:
+		raw_vals = ser.readline()
+		wheel, stripes = parse_vals(raw_vals)
+			
+		if wheel ==  "right":
+			right_rev_count = stripes/8.0
+
+		if wheel ==  "left":
+			left_rev_count = stripes/8.0
+	"""
+
 
 if __name__ == '__main__':
-#	try:
-#		main()
-	main()
-	"""
-	#except rospy.ROSInterruptException:
-	#	pass
-	#	ser.close()
-	"""
+	try:
+		main()
+	except rospy.ROSInterruptException:
+		pass
+		ser.close()

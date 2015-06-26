@@ -1,2 +1,2 @@
-wheel_odom
+system:wheel_odom
 -DCATKIN_DEVEL_PREFIX=/home/rbtying/wchair/devel -DCMAKE_INSTALL_PREFIX=/home/rbtying/wchair/install

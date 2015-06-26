@@ -265,6 +265,12 @@ gtest_force_shared_crt:BOOL=OFF
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //Value Computed by CMake
+system_BINARY_DIR:STATIC=/home/rbtying/wchair/build/system
+
+//Value Computed by CMake
+system_SOURCE_DIR:STATIC=/home/rbtying/wchair/src/system
+
+//Value Computed by CMake
 wheel_odom_BINARY_DIR:STATIC=/home/rbtying/wchair/build/wheel_odom
 
 //Value Computed by CMake
@@ -372,7 +378,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=3
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

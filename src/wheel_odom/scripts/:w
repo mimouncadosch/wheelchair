@@ -1,0 +1,45 @@
+from threading import Thread
+import time
+import signal 
+import sys
+
+a = 0 # global variable
+
+def thread1(threadname):
+	global a
+	# read variable a modified by thread 2
+	while 1:
+		print "In thread1: ", a
+		time.sleep(4)
+
+def thread2(threadname):
+	global a
+	# modify variable 
+	while 1:
+		a += 1
+		time.sleep(1)
+		print "In thread2: ", a
+
+	
+#thread1 = Thread(target=thread1, args=("Thread-1", ))
+thread2 = Thread(target=thread2, args=("Thread-2", ))
+
+thread1.daemon = False
+thread2.daemon = True 
+
+thread1.start()
+thread2.start()
+#thread1.join()
+#thread2.join()
+
+
+print "Running multi-threaded version of wheel odometry"
+
+
+
+def signal_handler(signal, frame):
+	thread2.join()
+	sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
