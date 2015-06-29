@@ -16,13 +16,23 @@ import sys
 Pass USB port as command line argument. Else, default value will be used.  """
 
 # Global variables
+
+# Encoder count (right, left)
+encoder_count_right = 0
+encoder_count_left  = 0
+
+# Encoder count in last time step (right, left)
+last_encoder_count_right = 0
+last_encoder_count_left  = 0
+
+"""
 # Number of wheel revolutions (right, left)
 right_revs = 0
 left_revs  = 0
-
 # Number of wheel revolutions in last time step (right, left)
 last_right_revs = 0
 last_left_revs  = 0
+"""
 
 # Position variables
 x 		= 0
@@ -57,8 +67,8 @@ This thread reads wheel revolutions from the serial port, and updates the corres
 Updates odometry values 100 times a second
 """
 def update_odometry_values(threadname, port):
-	global right_revs
-	global left_revs
+	global encoder_count_right
+	global encoder_count_left
 	ignore_vars = 0
 
 	try:	
@@ -71,7 +81,7 @@ def update_odometry_values(threadname, port):
 
 	while True:
 		raw_vals = ser.readline()
-		if ignore_vars < 30:
+		if ignore_vars < 15:
 			print "discarding data, ignore_vars: ", ignore_vars
 			ignore_vars += 1
 			continue
@@ -79,9 +89,7 @@ def update_odometry_values(threadname, port):
 		if check_raw_vals(raw_vals) is False:
 			continue
 
-		stripes_right, stripes_left = parse_vals(raw_vals)
-		right_revs = stripes_right/8.0
-		left_revs = stripes_left/8.0
+		encoder_count_right, encoder_count_left = parse_vals(raw_vals)
 
 		time.sleep(serial_sleep_time)
 
@@ -94,16 +102,21 @@ def update_odometry_values(threadname, port):
 This function computes the vehicle position from odometry data
 """
 def update_vehicle_position(thread):
+	global D
 
 	# Create ROS node and topic
 	pub = rospy.Publisher("wheel_odometry", geometry_msgs.msg.PoseStamped, queue_size=100)
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
 	rate = rospy.Rate(2) # Units in Hz
+	
+	wheel_circumference = math.pi * D
+	counts_per_rev = 8 
+	distance_per_encoder_count = wheel_circumference / counts_per_rev 
 
 	try:
 		# This loop will run every (1/rate) seconds
 		while not rospy.is_shutdown():
-			compute_position_from_odometry()
+			compute_position_from_odometry(distance_per_encoder_count)
 		 	#print "VEHICLE POSITION (theta in deg): ", x, y, math.degrees(theta)
 
 			# Prepare position message to be sent in topic
@@ -134,34 +147,31 @@ def update_vehicle_position(thread):
 		thread.join()
 
 	
-def compute_position_from_odometry():
-	global right_revs
-	global left_revs
-	global last_right_revs
-	global last_left_revs
-	global D
+def compute_position_from_odometry(distance_per_encoder_count):
+	global encoder_count_right
+	global encoder_count_left
+	global last_encoder_count_right
+	global last_encoder_count_left
 	global b
 	global x
 	global y
 	global theta
 
 	# Number of revolutions in dt (time step)
-	d_right_revs = right_revs - last_right_revs
-	d_left_revs = left_revs - last_left_revs
+	d_encoder_count_right = encoder_count_right - last_encoder_count_right
+	d_encoder_count_left  = encoder_count_left - last_encoder_count_left
 
-	#print right_revs, left_revs	
-	#print "d_right_revs: ", d_right_revs, "d_left_revs: ", d_left_revs
+	print d_encoder_count_right, d_encoder_count_left
 
 	# Compute right and left wheel displacement d_sr and d_sl in time step
-	d_sr = math.pi * D * d_right_revs 
-	d_sl = math.pi * D * d_left_revs
+	d_sr = distance_per_encoder_count * d_encoder_count_right 
+	d_sl = distance_per_encoder_count * d_encoder_count_left
 
 	# Compute x and y position of wheelchair assuming differential drive	
 	# Important: d_theta and theta are in radians
 	d_s = (d_sr + d_sl) / 2.0
 
 	d_theta = (d_sr - d_sl) / b
-	#print "RR: ", right_revs, " LR: ", left_revs
 	#print "d_sr: ", d_sr, " d_sl: ", d_sl
 	#print "d_theta :", math.degrees(d_theta)
 
@@ -183,8 +193,8 @@ def compute_position_from_odometry():
 	y += d_y	
 
 	# update system	
-	last_right_revs = right_revs
-	last_left_revs = left_revs
+	last_encoder_count_right = encoder_count_right
+	last_encoder_count_left  = encoder_count_left
 
 	return True
 
