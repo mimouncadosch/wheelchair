@@ -21,7 +21,6 @@ class DirectionEncoderThread: public Thread {
       // Sensor reading values
       int n;              // New sensor reading
       int last_n;         // Previous sensor reading
-      String threadName;  // Thread name
       
       void run() {
           n = readSensor(pinB);  
@@ -32,34 +31,31 @@ class DirectionEncoderThread: public Thread {
               else {
                   dir = 1;
               }
+//              Serial.println(dir);
           }
           last_n = n;
-          Serial.println(threadName + " :" + dir);
           runned();
       }       
 };
 
-class SpeedEncoderThread: public Thread {
-    public: 
-    int revs;  // Revolutions
+class SpeedEncoder {
+  public:   
     int pin;
-    int n;
-    int last_n;
-    String threadName;
-    
-    void run() {
-        n = readSensor(pin);
+      int revs;
+      int n;
+      int last_n = LOW;
+      
+      void update() {
+        n = readSensor(pin);    
         if (n != last_n) {
-            revs += 1;
-            Serial.println(threadName + " :" + revs);
-            last_n = n;
-          }
-          runned();
-    }
+          revs += 1;
+          Serial.println(revs);
+          last_n = n;
+        }  
+      }
 };
-
 DirectionEncoderThread directionEncoder = DirectionEncoderThread();
-SpeedEncoderThread speedEncoder = SpeedEncoderThread();
+SpeedEncoder speedEncoder = SpeedEncoder();
 
 ThreadController controller = ThreadController();
 
@@ -75,28 +71,21 @@ void setup() {
     directionEncoder.pinA = A0;
     directionEncoder.pinB = A1;
     directionEncoder.last_n = LOW;
-    directionEncoder.threadName = "right wheel direction: ";
-    directionEncoder.setInterval(100);
+    directionEncoder.setInterval(1);
     
-    // Set up direction encoder class variables
-    speedEncoder.revs = 0;
     speedEncoder.pin = A3;
+    speedEncoder.revs = 0;
     speedEncoder.last_n = LOW;
-    speedEncoder.threadName = "right_wheel speed: ";
-    directionEncoder.setInterval(10);
     
     // Add the Threads to our ThreadController
     controller.add(&directionEncoder);
-//    controller.add(&speedEncoder);
     
     Timer1.initialize(20000);
     Timer1.attachInterrupt(timerCallback);
     Timer1.start();
+    
 }
 
 void loop(){
-  // Get the fresh readings
-//  Serial.print("Speed Encoder Thread: ");
-//  Serial.println(speedEncoder.dir);
+  speedEncoder.update();
 }
-

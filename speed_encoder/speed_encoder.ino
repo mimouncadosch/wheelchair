@@ -31,6 +31,7 @@ void loop() {
     revsRight += 1;
     Serial.println(revsRight);
     last_n1 = n1;
-  }  
+  }
+  delay(1);
 }
 
