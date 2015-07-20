@@ -34,7 +34,7 @@ class SpeedEncoder  {
               n = readSensor(pin);    
               if (n != last_n) {
                   revs += 1;
-//                  Serial.println(revs);
+                  Serial.println(revs);
                   last_n = n;
               }
           }
@@ -89,7 +89,7 @@ void setup() {
 }
 
 void loop() {
-    revs = se.update();
+    se.update();
 //    dir = de.update();
-    Serial.println(revs);
+//    Serial.println(revs);
 }
