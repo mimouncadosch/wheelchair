@@ -12,8 +12,8 @@ int readSensor(int pin) {
 class SpeedEncoder  {
     // Class variables
     int pin;
-    int revs = 0;
     int n;
+    int revs = 0;
     int last_n;
     int updateInterval;      // interval between updates
     unsigned long lastUpdate; // last update of position
@@ -29,15 +29,18 @@ class SpeedEncoder  {
         int update() {
           if((micros() - lastUpdate) > updateInterval) { // time to update
               lastUpdate = micros();
-              
               // Update sensor value
               n = readSensor(pin);    
               if (n != last_n) {
-                  revs += 1;
                   last_n = n;
+                  revs += 1;
+                  return 1;
+              }
+              else { 
+                  return 0; 
               }
           }
-		return revs;        
+//        return revs;
         }
 };
 
@@ -45,7 +48,7 @@ class DirectionEncoder {
     // Class variables 
     int pinA;
     int pinB;
-    int dir;
+    int dir;  // Forward direction by default
     int n;
     int last_n;
     int updateInterval;
@@ -57,6 +60,7 @@ class DirectionEncoder {
             pinA = myPinA;
             pinB = myPinB;
             last_n = LOW;
+            dir = 1;
             updateInterval = interval;
         }
         
@@ -73,10 +77,10 @@ class DirectionEncoder {
                 else {
                     dir = 1;
                 }
-//              Serial.println(dir);
           }
           last_n = n;  
           }  
+        return dir;
         }
 };
 
@@ -87,8 +91,18 @@ void setup() {
     Serial.begin(9600);
 }
 
-void loop() {
-    Serial.println(se.update());
-
-//    Serial.println(revs);
+int totRevs = 0;
+int last_dir = 1;
+int dir = 1;
+int compensationRevs = 63;
+int compensated = false;
+void loop() {  
+    if (dir != last_dir && compensated == false) {
+      Serial.println("dir != last_dir");
+      totRevs -= compensationRevs;
+      compensated = true;
+    } 
+    dir = de.update();
+    totRevs += se.update() * de.update();
+    Serial.println(totRevs);
 }
