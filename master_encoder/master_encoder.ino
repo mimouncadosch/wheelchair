@@ -12,7 +12,7 @@ int readSensor(int pin) {
 class SpeedEncoder  {
     // Class variables
     int pin;
-    int revs;
+    int revs = 0;
     int n;
     int last_n;
     int updateInterval;      // interval between updates
@@ -34,10 +34,10 @@ class SpeedEncoder  {
               n = readSensor(pin);    
               if (n != last_n) {
                   revs += 1;
-                  Serial.println(revs);
                   last_n = n;
               }
           }
+		return revs;        
         }
 };
 
@@ -80,16 +80,15 @@ class DirectionEncoder {
         }
 };
 
-SpeedEncoder se = SpeedEncoder(A3, 100);
-DirectionEncoder de = DirectionEncoder(A0, A1, 100);
-int revs;
-int dir;
+SpeedEncoder se = SpeedEncoder(A3, 10);
+DirectionEncoder de = DirectionEncoder(A0, A1, 10);
+
 void setup() {
     Serial.begin(9600);
 }
 
 void loop() {
-    se.update();
-//    dir = de.update();
+    Serial.println(se.update());
+
 //    Serial.println(revs);
 }
