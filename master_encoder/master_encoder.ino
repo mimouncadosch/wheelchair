@@ -82,5 +82,5 @@ void setup() {
 
 void loop() {
     se_right.update();
-//    de_right.update();
+    de_right.update();
 }
