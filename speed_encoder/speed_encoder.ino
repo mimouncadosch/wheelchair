@@ -6,7 +6,7 @@ It is used to compute the wheelchair position with accuracy.
 
 
 //  Read voltage off Sparkfun photointerrupter
-int pin = A3;
+int pin = A0;
 int revsRight  = 0;
 int n1;
 int last_n1 = LOW;
@@ -32,6 +32,6 @@ void loop() {
     Serial.println(revsRight);
     last_n1 = n1;
   }
-  delay(1);
+  delay(0.1);
 }
 

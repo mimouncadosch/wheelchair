@@ -1,6 +1,6 @@
 // Right wheel settings
-int analogPinA = A0;
-int analogPinB = A1;
+int analogPinA = A5;
+int analogPinB = A4;
 int revsRight  = 0;
 String r;
 

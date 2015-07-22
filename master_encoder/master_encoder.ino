@@ -1,5 +1,3 @@
-
-
 // Above threshold: HIGH, Below threshold: LOW
 int threshold = 2.5;
 
@@ -84,25 +82,33 @@ class DirectionEncoder {
         }
 };
 
-SpeedEncoder se = SpeedEncoder(A3, 10);
-DirectionEncoder de = DirectionEncoder(A0, A1, 10);
+// Right wheel
+SpeedEncoder se_right;
+DirectionEncoder de_right;
 
 void setup() {
     Serial.begin(9600);
+    Serial.println("Setting up");
+    se_right = SpeedEncoder(A0, 15);
+    de_right = DirectionEncoder(A5, A4, 15);
+    delay(1000);
+    Serial.println("Ready");
 }
 
 int totRevs = 0;
 int last_dir = 1;
 int dir = 1;
-int compensationRevs = 63;
+int compensationRevs = 20;
+
 int compensated = false;
 void loop() {  
-    if (dir != last_dir && compensated == false) {
-      Serial.println("dir != last_dir");
-      totRevs -= compensationRevs;
-      compensated = true;
-    } 
-    dir = de.update();
-    totRevs += se.update() * de.update();
-    Serial.println(totRevs);
+  
+//    if (dir != last_dir && compensated == false) {
+//      Serial.println("dir != last_dir");
+//      totRevs -= compensationRevs;
+//      compensated = true;
+//    } 
+//    dir = de_right.update();
+//    totRevs += se_right.update() * de_right.update();
+//    Serial.println(totRevs);
 }
