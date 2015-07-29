@@ -4,10 +4,11 @@ This program counts the number of revolutions in each wheel.
 It is used to compute the wheelchair position with accuracy.
 */
 
+unsigned long start, finished, elapsed;
 
 //  Read voltage off Sparkfun photointerrupter
 int pin = A0;
-int revsRight  = 0;
+int ticksRight  = 0;
 int n1;
 int last_n1 = LOW;
 int threshold = 3.5;
@@ -25,13 +26,20 @@ int readSensor(int pin) {
 }
 
 void loop() {
+//  start = micros();
   n1 = readSensor(pin);
   
   if (n1 != last_n1) {
-    revsRight += 1;
-    Serial.println(revsRight);
+    // New tick detected
+    ticksRight += 1;
+    Serial.print("n: ");
+    Serial.println(ticksRight);
     last_n1 = n1;
   }
-  delay(0.1);
+//  finished=micros();
+//  elapsed=finished-start;
+//  Serial.print("elapsed ");
+//  Serial.println(elapsed);
+//  delay(0.1);
 }
 
