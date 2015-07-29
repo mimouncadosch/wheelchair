@@ -14,7 +14,7 @@ import sys
 
 """ 
 This file reads the wheel revolutions from the Arduino on the wheelchair and computes wheel odometry. The pose, as calculated from the wheel odometry is published over ROS.
-Pass USB port as command line argument. Else, default value will be used.  
+Pass USB port as command line argument, or in launch file. Else, default value will be used.  
 """
 
 # Global variables
