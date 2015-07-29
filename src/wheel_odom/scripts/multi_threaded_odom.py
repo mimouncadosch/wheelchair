@@ -12,8 +12,10 @@ import time
 import signal 
 import sys
 
-""" This file reads the wheel revolutions from the Arduino on the wheelchair and computes wheel odometry. The pose, as calculated from the wheel odometry is published over ROS.
-Pass USB port as command line argument. Else, default value will be used.  """
+""" 
+This file reads the wheel revolutions from the Arduino on the wheelchair and computes wheel odometry. The pose, as calculated from the wheel odometry is published over ROS.
+Pass USB port as command line argument. Else, default value will be used.  
+"""
 
 # Global variables
 
@@ -62,7 +64,7 @@ def main():
 	update_vehicle_position(thread)
 
 """
-This thread reads wheel revolutions from the serial port, and updates the corresponding global variables over ROS.
+This thread reads wheel revolutions from the serial port, and updates the corresponding global variables.
 
 Updates odometry values 100 times a second
 """
@@ -89,8 +91,9 @@ def update_odometry_values(threadname, port):
 		if check_raw_vals(raw_vals) is False:
 			continue
 
+		# Parse the values as received from the serial port
 		encoder_count_right, encoder_count_left = parse_vals(raw_vals)
-
+		#print encoder_count_right, encoder_count_left
 		time.sleep(serial_sleep_time)
 
 		if stop_serial_communication == True:
@@ -107,10 +110,10 @@ def update_vehicle_position(thread):
 	# Create ROS node and topic
 	pub = rospy.Publisher("wheel_odometry", geometry_msgs.msg.PoseStamped, queue_size=100)
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
-	rate = rospy.Rate(2) # Units in Hz
+	rate = rospy.Rate(1) # Units in Hz
 	
 	wheel_circumference = math.pi * D
-	counts_per_rev = 8 
+	counts_per_rev = 514
 	distance_per_encoder_count = wheel_circumference / counts_per_rev 
 
 	try:
@@ -160,8 +163,8 @@ def compute_position_from_odometry(distance_per_encoder_count):
 	# Number of revolutions in dt (time step)
 	d_encoder_count_right = encoder_count_right - last_encoder_count_right
 	d_encoder_count_left  = encoder_count_left - last_encoder_count_left
-
-	print d_encoder_count_right, d_encoder_count_left
+	#print ">>> ", distance_per_encoder_count
+	#print d_encoder_count_right, d_encoder_count_left
 
 	# Compute right and left wheel displacement d_sr and d_sl in time step
 	d_sr = distance_per_encoder_count * d_encoder_count_right 
