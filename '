@@ -20,12 +20,12 @@ Pass USB port as command line argument, or in launch file. Else, default value w
 # Global variables
 
 # Encoder count (right, left)
-right_ticks = 0
-left_ticks = 0
+encoder_count_right = 0
+encoder_count_left  = 0
 
 # Encoder count in last time step (right, left)
-last_right_ticks = 0 
-last_left_ticks = 0
+last_encoder_count_right = 0
+last_encoder_count_left  = 0
 
 """
 # Number of wheel revolutions (right, left)
@@ -41,6 +41,9 @@ x 		= 0
 y 		= 0 
 theta 	= 0	# in radians
 
+# Wheelchair parameter values
+D = 0.34 # Wheel diameter, 34cm
+b = 0.61 # Distance between two wheels, 61cm
 
 # Communication variables
 serial_communication_rate = 100 # in Hz
@@ -64,15 +67,15 @@ def main():
 """
 This thread reads the number of wheel ticks from the serial port for the right and left wheels. 
 This number is computed by the sensors on board. 
-The number of right and left wheel ticks is updated, and assigned to its corresponding global variables.
+The number of wheel ticks is updated, and assigned to its corresponding global variables.
 
 Updates odometry values 100 times a second
 """
 def read_serial_port(threadname, port):
-	global right_ticks, left_ticks
+	global encoder_count_right
+	global encoder_count_left
 	ignore_vars = 0
 
-	# Open serial port
 	try:	
 		ser = serial.Serial(port, 9600)
 	except:
@@ -83,21 +86,18 @@ def read_serial_port(threadname, port):
 
 	while True:
 		raw_vals = ser.readline()
-		# Ignore the 15 first values, which tend to be noise
 		if ignore_vars < 15:
 			print "discarding data, ignore_vars: ", ignore_vars
 			ignore_vars += 1
 			continue
 
-		# Ensure the string received from the serial port is properly formatted
 		if check_raw_vals(raw_vals) is False:
 			continue
 
 		# Parse the values as received from the serial port
-		right_ticks, left_ticks = parse_vals(raw_vals)
-		#print right_ticks, left_ticks
+		encoder_count_right, encoder_count_left = parse_vals(raw_vals)
 		#print encoder_count_right, encoder_count_left
-		#time.sleep(serial_sleep_time)
+		time.sleep(serial_sleep_time)
 
 		if stop_serial_communication == True:
 			print "Breaking Serial Communication with the Arduino."
@@ -115,11 +115,14 @@ def update_vehicle_position(thread):
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
 	rate = rospy.Rate(1) # Units in Hz
 	
-	
+	wheel_circumference = math.pi * D
+	counts_per_rev = 514
+	distance_per_encoder_count = wheel_circumference / counts_per_rev 
+
 	try:
 		# This loop will run every (1/rate) seconds
 		while not rospy.is_shutdown():
-			compute_position_from_odometry()
+			compute_position_from_odometry(distance_per_encoder_count)
 		 	#print "VEHICLE POSITION (theta in deg): ", x, y, math.degrees(theta)
 
 			# Prepare position message to be sent in topic
@@ -150,24 +153,19 @@ def update_vehicle_position(thread):
 		thread.join()
 
 	
-def compute_position_from_odometry():
-	global right_ticks, left_ticks, last_right_ticks, last_left_ticks
+def compute_position_from_odometry(distance_per_encoder_count):
+	global encoder_count_right
+	global encoder_count_left
+	global last_encoder_count_right
+	global last_encoder_count_left
+	global b
 	global x
 	global y
 	global theta
-	
-	# Wheelchair parameter values
-	b = 0.61 # Distance between two wheels, 61cm
-	D = 0.34 # Wheel diameter, 34cm
-	counts_per_rev = 514
-
-	wheel_circumference = math.pi * D
-	distance_per_encoder_count = wheel_circumference / counts_per_rev 
 
 	# Number of revolutions in dt (time step)
-	d_right_ticks = right_ticks - last_right_ticks 
-	d_left_ticks  = left_ticks - last_left_ticks 
-
+	d_encoder_count_right = encoder_count_right - last_encoder_count_right
+	d_encoder_count_left  = encoder_count_left - last_encoder_count_left
 	#print ">>> ", distance_per_encoder_count
 	#print d_encoder_count_right, d_encoder_count_left
 
@@ -201,8 +199,8 @@ def compute_position_from_odometry():
 	y += d_y	
 
 	# update system	
-	last_right_ticks = right_ticks
-	last_left_ticks = left_ticks
+	last_encoder_count_right = encoder_count_right
+	last_encoder_count_left  = encoder_count_left
 
 	return True
 
@@ -220,11 +218,6 @@ def parse_args():
 
 	return port
 
-"""
-This function ensures that the raw strings received from the serial port are formatted correctly. 
-The format is "right: (- if going backward)(number of right ticks) \t left: (- if going backward)(number of left ticks)".
-If these raw strings are not properly formatted, the relevant values will not be properly parsed. 
-"""
 def check_raw_vals(raw_vals):
 	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t\s(left):\s(-?[0-9]+)", raw_vals)
 	# If nothing found
