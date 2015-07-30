@@ -45,7 +45,6 @@ theta 	= 0	# in radians
 # Communication variables
 serial_port_is_open = True
 serial_communication_rate = 100 # in Hz
-stop_serial_communication = False
 
 def main():
 	# Serial port
@@ -70,17 +69,8 @@ The number of right and left wheel ticks is updated, and assigned to its corresp
 Updates odometry values 100 times a second
 """
 def read_serial_port(threadname, port):
-	global serial_port_is_open
-	print serial_port_is_open
-	while serial_port_is_open:
-		print "Hello Read Serial Port"
-		time.sleep(0.5)
+	global serial_port_is_open, right_ticks, left_ticks
 
-		if serial_port_is_open is False:
-			print "Closing serial port"
-
-	"""
-	global right_ticks, left_ticks
 	ignore_vars = 0
 
 	# Open serial port
@@ -90,10 +80,9 @@ def read_serial_port(threadname, port):
 		print "Failed to open serial connection"
 		return False
 
-	serial_sleep_time =  (1.0 / serial_communication_rate) # T = 1/f
-
-	while True:
+	while serial_port_is_open:
 		raw_vals = ser.readline()
+
 		# Ignore the 15 first values, which tend to be noise
 		if ignore_vars < 15:
 			print "discarding data, ignore_vars: ", ignore_vars
@@ -107,13 +96,10 @@ def read_serial_port(threadname, port):
 		# Parse the values as received from the serial port
 		right_ticks, left_ticks = parse_vals(raw_vals)
 		print right_ticks, left_ticks
-		#print encoder_count_right, encoder_count_left
-		#time.sleep(serial_sleep_time)
 
-		if stop_serial_communication == True:
-			print "Breaking Serial Communication with the Arduino."
+		if serial_port_is_open is False:
+			print "Closing serial port"
 			break
-	"""
 
 """
 This function computes the vehicle position from odometry data
@@ -254,9 +240,7 @@ The format is "right: (- if going backward)(number of right ticks) \t left: (- i
 If these raw strings are not properly formatted, the relevant values will not be properly parsed. 
 """
 def check_raw_vals(raw_vals):
-	print "checking raw vals"
-	print raw_vals
-	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t\s(left):\s(-?[0-9]+)", raw_vals)
+	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t(left):\s(-?[0-9]+)", raw_vals)
 	# If nothing found
 	if not parsed_vals: 
 		return False
@@ -268,7 +252,7 @@ def check_raw_vals(raw_vals):
 		return True
 	
 def parse_vals(raw_vals):
-	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t\s(left):\s(-?[0-9]+)", raw_vals)[0]
+	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t(left):\s(-?[0-9]+)", raw_vals)[0]
 	right_ticks = int(parsed_vals[1])
 	left_ticks = int(parsed_vals[3])
 	return right_ticks, left_ticks 
