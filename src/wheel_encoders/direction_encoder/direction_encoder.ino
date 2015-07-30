@@ -1,17 +1,17 @@
 // Right wheel settings
-int analogPinA = A5;
-int analogPinB = A4;
+int analogPinA = A2;
+int analogPinB = A1;
 int revsRight  = 0;
 String r;
 
 // Left wheel settings
-int analogPinC = A2;
+int analogPinC = A4;
 int analogPinD = A3;
 int revsLeft   = 0;
 String l;
 
 // Above threshold: 1, Below threshold: 0
-int threshold = 3.5;
+int threshold = 3.0;
 
 int n1;
 int last_n1 = LOW;
@@ -35,7 +35,7 @@ void loop() {
   
   n1 = readSensor(analogPinB);
   n2 = readSensor(analogPinD);
-  
+//  Serial.println(n1);
   // Right wheel revolutions  
   if ((last_n1 == LOW) && (n1 == HIGH)) {
     if (readSensor(analogPinA) == LOW) { //analogPinB
