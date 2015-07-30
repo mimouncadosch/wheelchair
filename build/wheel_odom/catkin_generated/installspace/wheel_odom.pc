@@ -1,8 +1,0 @@
-prefix=/home/rbtying/wchair/install
-
-Name: wheel_odom
-Description: Description of wheel_odom
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/rbtying/wchair/install/lib 
-Requires: 

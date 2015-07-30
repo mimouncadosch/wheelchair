@@ -1,8 +1,8 @@
-# Install script for directory: /home/rbtying/wchair/src/wheel_odom
+# Install script for directory: /home/rbtying/finalize_wheelchair/src/odometry
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/wchair/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/finalize_wheelchair/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/rbtying/wchair/build/wheel_odom/catkin_generated/installspace/wheel_odom.pc")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/odometry/catkin_generated/installspace/odometry.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wheel_odom/cmake" TYPE FILE FILES
-    "/home/rbtying/wchair/build/wheel_odom/catkin_generated/installspace/wheel_odomConfig.cmake"
-    "/home/rbtying/wchair/build/wheel_odom/catkin_generated/installspace/wheel_odomConfig-version.cmake"
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/odometry/cmake" TYPE FILE FILES
+    "/home/rbtying/finalize_wheelchair/build/odometry/catkin_generated/installspace/odometryConfig.cmake"
+    "/home/rbtying/finalize_wheelchair/build/odometry/catkin_generated/installspace/odometryConfig-version.cmake"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wheel_odom" TYPE FILE FILES "/home/rbtying/wchair/src/wheel_odom/package.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/odometry" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/src/odometry/package.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

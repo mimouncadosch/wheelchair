@@ -3,6 +3,6 @@ CATKIN_PACKAGE_PREFIX = ""
 PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
-PROJECT_NAME = "wheel_odom"
-PROJECT_SPACE_DIR = "/home/rbtying/wchair/install"
+PROJECT_NAME = "odometry"
+PROJECT_SPACE_DIR = "/home/rbtying/finalize_wheelchair/devel"
 PROJECT_VERSION = "0.0.0"

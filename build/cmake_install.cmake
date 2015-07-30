@@ -1,8 +1,8 @@
-# Install script for directory: /home/rbtying/wchair/src
+# Install script for directory: /home/rbtying/finalize_wheelchair/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/wchair/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/finalize_wheelchair/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,74 +44,74 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/_setup_util.py")
+   "/home/rbtying/finalize_wheelchair/install/_setup_util.py")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE PROGRAM FILES "/home/rbtying/wchair/build/catkin_generated/installspace/_setup_util.py")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE PROGRAM FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/_setup_util.py")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/env.sh")
+   "/home/rbtying/finalize_wheelchair/install/env.sh")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE PROGRAM FILES "/home/rbtying/wchair/build/catkin_generated/installspace/env.sh")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE PROGRAM FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/env.sh")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/setup.bash")
+   "/home/rbtying/finalize_wheelchair/install/setup.bash")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE FILE FILES "/home/rbtying/wchair/build/catkin_generated/installspace/setup.bash")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/setup.bash")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/setup.sh")
+   "/home/rbtying/finalize_wheelchair/install/setup.sh")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE FILE FILES "/home/rbtying/wchair/build/catkin_generated/installspace/setup.sh")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/setup.sh")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/setup.zsh")
+   "/home/rbtying/finalize_wheelchair/install/setup.zsh")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE FILE FILES "/home/rbtying/wchair/build/catkin_generated/installspace/setup.zsh")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/setup.zsh")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/rbtying/wchair/install/.rosinstall")
+   "/home/rbtying/finalize_wheelchair/install/.rosinstall")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/rbtying/wchair/install" TYPE FILE FILES "/home/rbtying/wchair/build/catkin_generated/installspace/.rosinstall")
+FILE(INSTALL DESTINATION "/home/rbtying/finalize_wheelchair/install" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/catkin_generated/installspace/.rosinstall")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -124,9 +124,9 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/rbtying/wchair/build/gtest/cmake_install.cmake")
-  INCLUDE("/home/rbtying/wchair/build/system/cmake_install.cmake")
-  INCLUDE("/home/rbtying/wchair/build/wheel_odom/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/gtest/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/odometry/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/system/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -136,7 +136,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/rbtying/wchair/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/rbtying/finalize_wheelchair/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/rbtying/wchair/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/rbtying/finalize_wheelchair/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

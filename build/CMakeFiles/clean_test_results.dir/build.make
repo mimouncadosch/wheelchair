@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rbtying/wchair/src
+CMAKE_SOURCE_DIR = /home/rbtying/finalize_wheelchair/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rbtying/wchair/build
+CMAKE_BINARY_DIR = /home/rbtying/finalize_wheelchair/build
 
 # Utility rule file for clean_test_results.
 
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = /home/rbtying/wchair/build
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/cmake -E remove_directory /home/rbtying/wchair/build/test_results
+	/usr/bin/cmake -E remove_directory /home/rbtying/finalize_wheelchair/build/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -64,6 +64,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/rbtying/wchair/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rbtying/wchair/src /home/rbtying/wchair/src /home/rbtying/wchair/build /home/rbtying/wchair/build /home/rbtying/wchair/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rbtying/finalize_wheelchair/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rbtying/finalize_wheelchair/src /home/rbtying/finalize_wheelchair/src /home/rbtying/finalize_wheelchair/build /home/rbtying/finalize_wheelchair/build /home/rbtying/finalize_wheelchair/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 
