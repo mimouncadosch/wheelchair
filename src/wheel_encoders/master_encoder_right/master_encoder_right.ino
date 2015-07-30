@@ -12,11 +12,8 @@ int last_dir = 1;
 
 int n;
 int last_n = LOW;
-
-
-int compensationTicks = 20;
-int compensatedRight = false;  // This boolean variable indicates whether the speed encoder has been compensated for the delay in the direction encoder.
-
+int n2;
+int last_n2 = LOW;
 
 // Read optical IR sensor, convert analog signal to digital value (0 or 1)
 int readSensor(int pin, float threshold) {
@@ -62,14 +59,17 @@ class DirectionEncoder {
 
 DirectionEncoder de_right = DirectionEncoder(A2, A1);
 
+
 void setup() {
     Serial.begin(9600);
 }
 
+int compensationTicks = 20;
+int compensatedRight = false;  // This boolean variable indicates whether the speed encoder has been compensated for the delay in the direction encoder.
 void loop() {
   
-        de_right.update();
-    
+      de_right.update();
+
        // Check if change in direction right wheel
       if (de_right.dir != de_right.last_dir && compensatedRight == false) {
 //          Serial.println("Change in direction");
