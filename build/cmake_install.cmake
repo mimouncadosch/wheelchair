@@ -126,7 +126,10 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/rbtying/finalize_wheelchair/build/gtest/cmake_install.cmake")
   INCLUDE("/home/rbtying/finalize_wheelchair/build/odometry/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/slam_gmapping/slam_gmapping/cmake_install.cmake")
   INCLUDE("/home/rbtying/finalize_wheelchair/build/system/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/depthimage_to_laserscan/cmake_install.cmake")
+  INCLUDE("/home/rbtying/finalize_wheelchair/build/slam_gmapping/gmapping/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
