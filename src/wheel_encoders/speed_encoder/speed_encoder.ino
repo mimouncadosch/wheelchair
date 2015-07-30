@@ -11,7 +11,7 @@ int pin = A0;
 int ticksRight  = 0;
 int n1;
 int last_n1 = LOW;
-int threshold = 3.5;
+int threshold = 3.0;
 
 void setup() {
   Serial.begin(9600);
