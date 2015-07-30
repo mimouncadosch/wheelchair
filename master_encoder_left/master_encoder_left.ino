@@ -61,68 +61,40 @@ class DirectionEncoder {
               if ( (last_n == LOW) && (n == HIGH) ) {
                 if ( readSensor(pinA, 3.0) == LOW )  {
                     dir = 1;
-                    last_n = n;
-                    return dir;
                 }
                 else {
                     dir = -1;
-                    last_n = n;
-                    return dir;
                 }
           }
-//          last_n = n;
-//          return dir;
+          last_n = n;
+          return dir;
         }
 };
 
-
-SpeedEncoder se_right = SpeedEncoder(A0);
-SpeedEncoder se_left  = SpeedEncoder(A1);
-DirectionEncoder de_right = DirectionEncoder(A1, A2);
-DirectionEncoder de_left = DirectionEncoder(A3, A2);
+SpeedEncoder se_left  = SpeedEncoder(A0);
+DirectionEncoder de_left = DirectionEncoder(A1, A2);
 
 void setup() {
     Serial.begin(9600);
 }
 
-int ticksRight = 0;
 int ticksLeft = 0;
-
 int compensationTicks = 20;
 
 // This boolean variable indicates whether the speed encoder has been compensated for the delay in the direction encoder.
-int compensatedRight = false;
 int compensatedLeft = false;
 
 void loop() {
-  
-      de_right.update();
       de_left.update();
-      
-      // Check if change in direction right wheel
-      if (de_right.dir != de_right.last_dir && compensatedRight == false) {
-//          Serial.println("Change in direction");
-          de_right.last_dir = de_right.dir;
-          ticksRight -= compensationTicks;
-          compensatedRight = true;
-
-      }
       
       // Check if change in direction left wheel
       if (de_left.dir != de_left.last_dir && compensatedLeft == false) {
-//          Serial.println("Change in direction");
+          Serial.println("Change in direction");
           de_left.last_dir = de_left.dir;
           ticksLeft -= compensationTicks;
           compensatedLeft = true;        
       }
-      ticksRight += se_right.update() * de_right.dir;
-      ticksLeft += se_left.update() * de_left.dir;
-      Serial.print("right: ");
-      Serial.print(ticksRight);
-      Serial.print("\t");
-      Serial.print("left: ");
-      Serial.println(ticksLeft);
-      
-      compensatedRight = false;
+
+
       compensatedLeft = false;
 }
