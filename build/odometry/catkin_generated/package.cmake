@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "odometry")
+set(odometry_MAINTAINER "rbtying <rbtying@todo.todo>")
+set(odometry_DEPRECATED "")
+set(odometry_VERSION "0.0.0")
+set(odometry_BUILD_DEPENDS )
+set(odometry_RUN_DEPENDS )
+set(odometry_BUILDTOOL_DEPENDS "catkin")

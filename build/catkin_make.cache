@@ -1,0 +1,2 @@
+odometry:system
+-DCATKIN_DEVEL_PREFIX=/home/rbtying/finalize_wheelchair/devel -DCMAKE_INSTALL_PREFIX=/home/rbtying/finalize_wheelchair/install

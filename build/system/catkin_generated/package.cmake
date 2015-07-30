@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "system")
+set(system_MAINTAINER "rbtying <rbtying@todo.todo>")
+set(system_DEPRECATED "")
+set(system_VERSION "0.0.0")
+set(system_BUILD_DEPENDS )
+set(system_RUN_DEPENDS )
+set(system_BUILDTOOL_DEPENDS "catkin")
