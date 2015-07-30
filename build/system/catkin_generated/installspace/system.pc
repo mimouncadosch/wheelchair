@@ -1,8 +1,8 @@
-prefix=/home/rbtying/wchair/install
+prefix=/home/rbtying/finalize_wheelchair/install
 
 Name: system
 Description: Description of system
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/rbtying/wchair/install/lib 
+Libs: -L/home/rbtying/finalize_wheelchair/install/lib 
 Requires: 

@@ -43,6 +43,7 @@ theta 	= 0	# in radians
 
 
 # Communication variables
+serial_port_is_open = True
 serial_communication_rate = 100 # in Hz
 stop_serial_communication = False
 
@@ -69,6 +70,16 @@ The number of right and left wheel ticks is updated, and assigned to its corresp
 Updates odometry values 100 times a second
 """
 def read_serial_port(threadname, port):
+	global serial_port_is_open
+	print serial_port_is_open
+	while serial_port_is_open:
+		print "Hello Read Serial Port"
+		time.sleep(0.5)
+
+		if serial_port_is_open is False:
+			print "Closing serial port"
+
+	"""
 	global right_ticks, left_ticks
 	ignore_vars = 0
 
@@ -95,21 +106,34 @@ def read_serial_port(threadname, port):
 
 		# Parse the values as received from the serial port
 		right_ticks, left_ticks = parse_vals(raw_vals)
-		#print right_ticks, left_ticks
+		print right_ticks, left_ticks
 		#print encoder_count_right, encoder_count_left
 		#time.sleep(serial_sleep_time)
 
 		if stop_serial_communication == True:
 			print "Breaking Serial Communication with the Arduino."
 			break
-
+	"""
 
 """
 This function computes the vehicle position from odometry data
 """
 def update_vehicle_position(thread):
-	global D
+	global serial_port_is_open
+	try:
+		while True:
+			print "computing position from odometry values"
+			time.sleep(2)
 
+	except KeyboardInterrupt:
+		print "Keyboard Interrupt"
+		serial_port_is_open = False
+		thread.join()
+		pass
+
+	return True
+
+	"""
 	# Create ROS node and topic
 	pub = rospy.Publisher("wheel_odometry", geometry_msgs.msg.PoseStamped, queue_size=100)
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
@@ -147,9 +171,13 @@ def update_vehicle_position(thread):
 	except KeyboardInterrupt:
 		print "Stopping Serial Communication"
 		stop_serial_communication = True
-		thread.join()
 
-	
+	"""
+
+	thread.join()
+	while True:
+		print "main thread"
+
 def compute_position_from_odometry():
 	global right_ticks, left_ticks, last_right_ticks, last_left_ticks
 	global x
@@ -209,13 +237,13 @@ def compute_position_from_odometry():
 def parse_args():
 	default_port = "/dev/ttyACM0"
 	if len(sys.argv) == 1:
-		print "No USB port given, default will be used (/dev/cu.usbmodem1411)"
+		print "No USB port given, default will be used (" , default_port, ")"
 		port = default_port
 	elif len(sys.argv) == 2:
 		print "USB port given: ", str(sys.argv[1])
 		port = str(sys.argv[1])
 	elif len(sys.argv) > 2:
-		print "Too many arguments, default port will be used (/dev/cu.usbmodem1411)"
+		print "Too many arguments, default port will be used (" , default_port, ")"
 		port = default_port
 
 	return port
@@ -226,6 +254,8 @@ The format is "right: (- if going backward)(number of right ticks) \t left: (- i
 If these raw strings are not properly formatted, the relevant values will not be properly parsed. 
 """
 def check_raw_vals(raw_vals):
+	print "checking raw vals"
+	print raw_vals
 	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t\s(left):\s(-?[0-9]+)", raw_vals)
 	# If nothing found
 	if not parsed_vals: 
@@ -239,9 +269,9 @@ def check_raw_vals(raw_vals):
 	
 def parse_vals(raw_vals):
 	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t\s(left):\s(-?[0-9]+)", raw_vals)[0]
-	stripes_right = int(parsed_vals[1])
-	stripes_left = int(parsed_vals[3])
-	return stripes_right, stripes_left
+	right_ticks = int(parsed_vals[1])
+	left_ticks = int(parsed_vals[3])
+	return right_ticks, left_ticks 
 
 if __name__ == '__main__':
 	try:

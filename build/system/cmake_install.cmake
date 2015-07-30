@@ -1,8 +1,8 @@
-# Install script for directory: /home/rbtying/wchair/src/system
+# Install script for directory: /home/rbtying/finalize_wheelchair/src/system
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/wchair/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/rbtying/finalize_wheelchair/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/rbtying/wchair/build/system/catkin_generated/installspace/system.pc")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/build/system/catkin_generated/installspace/system.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/system/cmake" TYPE FILE FILES
-    "/home/rbtying/wchair/build/system/catkin_generated/installspace/systemConfig.cmake"
-    "/home/rbtying/wchair/build/system/catkin_generated/installspace/systemConfig-version.cmake"
+    "/home/rbtying/finalize_wheelchair/build/system/catkin_generated/installspace/systemConfig.cmake"
+    "/home/rbtying/finalize_wheelchair/build/system/catkin_generated/installspace/systemConfig-version.cmake"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/system" TYPE FILE FILES "/home/rbtying/wchair/src/system/package.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/system" TYPE FILE FILES "/home/rbtying/finalize_wheelchair/src/system/package.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
