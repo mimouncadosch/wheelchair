@@ -101,7 +101,7 @@ def update_vehicle_position(thread):
 	# Create ROS node and topic
 	pub = rospy.Publisher("wheel_odometry", geometry_msgs.msg.PoseStamped, queue_size=100)
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
-	rate = rospy.Rate(20) # Units in Hz
+	rate = rospy.Rate(5) # Units in Hz
 	
 	# Wheelchair parameter values
 	b = 0.61 # Distance between two wheels, 61cm
@@ -114,7 +114,7 @@ def update_vehicle_position(thread):
 	try:
 		# This loop will run every (1/rate) seconds
 		while not rospy.is_shutdown():
-			#print "computing position from odometry values"
+			#rospy.loginfo("computing position from odometry values")
 			compute_position_from_odometry(distance_per_tick)
 
 			# Prepare position message to be sent in topic
@@ -157,7 +157,7 @@ def compute_position_from_odometry(distance_per_tick):
 	d_right_ticks = right_ticks - last_right_ticks 
 	d_left_ticks  = left_ticks - last_left_ticks 
 
-	print d_right_ticks, d_left_ticks 
+	print right_ticks, left_ticks 
 
 	# Compute right and left wheel displacement d_sr and d_sl in time step
 	d_sr = distance_per_tick * d_right_ticks 
@@ -186,7 +186,7 @@ def compute_position_from_odometry(distance_per_tick):
 	x += d_x
 	y += d_y	
 
-	#print "Vehicle position (theta in deg): ", x, y, math.degrees(theta)
+	print "Vehicle position (theta in deg): ", x, y, math.degrees(theta)
 	# update system	
 	last_right_ticks = right_ticks
 	last_left_ticks = left_ticks
