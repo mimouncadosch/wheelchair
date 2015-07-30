@@ -27,15 +27,6 @@ left_ticks = 0
 last_right_ticks = 0 
 last_left_ticks = 0
 
-"""
-# Number of wheel revolutions (right, left)
-right_revs = 0
-left_revs  = 0
-# Number of wheel revolutions in last time step (right, left)
-last_right_revs = 0
-last_left_revs  = 0
-"""
-
 # Position variables
 x 		= 0
 y 		= 0 
@@ -95,7 +86,7 @@ def read_serial_port(threadname, port):
 
 		# Parse the values as received from the serial port
 		right_ticks, left_ticks = parse_vals(raw_vals)
-		print right_ticks, left_ticks
+		#print right_ticks, left_ticks
 
 		if serial_port_is_open is False:
 			print "Closing serial port"
@@ -105,32 +96,26 @@ def read_serial_port(threadname, port):
 This function computes the vehicle position from odometry data
 """
 def update_vehicle_position(thread):
-	global serial_port_is_open
-	try:
-		while True:
-			print "computing position from odometry values"
-			time.sleep(2)
+	global serial_port_is_open, x, y, theta
 
-	except KeyboardInterrupt:
-		print "Keyboard Interrupt"
-		serial_port_is_open = False
-		thread.join()
-		pass
-
-	return True
-
-	"""
 	# Create ROS node and topic
 	pub = rospy.Publisher("wheel_odometry", geometry_msgs.msg.PoseStamped, queue_size=100)
 	rospy.init_node("wheel_odometry_publisher", anonymous=True)
-	rate = rospy.Rate(1) # Units in Hz
+	rate = rospy.Rate(20) # Units in Hz
 	
-	
+	# Wheelchair parameter values
+	b = 0.61 # Distance between two wheels, 61cm
+	D = 0.34 # Wheel diameter, 34cm
+	counts_per_rev = 514
+
+	wheel_circumference = math.pi * D
+	distance_per_tick = wheel_circumference / counts_per_rev 
+
 	try:
 		# This loop will run every (1/rate) seconds
 		while not rospy.is_shutdown():
-			compute_position_from_odometry()
-		 	#print "VEHICLE POSITION (theta in deg): ", x, y, math.degrees(theta)
+			#print "computing position from odometry values"
+			compute_position_from_odometry(distance_per_tick)
 
 			# Prepare position message to be sent in topic
 			position = geometry_msgs.msg.PoseStamped()
@@ -154,40 +139,29 @@ def update_vehicle_position(thread):
 			odom_broadcaster.sendTransform((x,y,0), (quaternion[0],quaternion[1],quaternion[2],quaternion[3]), rospy.get_rostime(), "base_link", "vehicle_link")
 
 			rate.sleep()
+
 	except KeyboardInterrupt:
-		print "Stopping Serial Communication"
-		stop_serial_communication = True
+		print "Keyboard Interrupt"
+		serial_port_is_open = False
+		thread.join()
+		pass
 
-	"""
+	return True
 
-	thread.join()
-	while True:
-		print "main thread"
-
-def compute_position_from_odometry():
-	global right_ticks, left_ticks, last_right_ticks, last_left_ticks
-	global x
-	global y
-	global theta
+def compute_position_from_odometry(distance_per_tick):
+	global right_ticks, left_ticks, last_right_ticks, last_left_ticks, x,y, theta
 	
-	# Wheelchair parameter values
 	b = 0.61 # Distance between two wheels, 61cm
-	D = 0.34 # Wheel diameter, 34cm
-	counts_per_rev = 514
-
-	wheel_circumference = math.pi * D
-	distance_per_encoder_count = wheel_circumference / counts_per_rev 
 
 	# Number of revolutions in dt (time step)
 	d_right_ticks = right_ticks - last_right_ticks 
 	d_left_ticks  = left_ticks - last_left_ticks 
 
-	#print ">>> ", distance_per_encoder_count
-	#print d_encoder_count_right, d_encoder_count_left
+	print d_right_ticks, d_left_ticks 
 
 	# Compute right and left wheel displacement d_sr and d_sl in time step
-	d_sr = distance_per_encoder_count * d_encoder_count_right 
-	d_sl = distance_per_encoder_count * d_encoder_count_left
+	d_sr = distance_per_tick * d_right_ticks 
+	d_sl = distance_per_tick * d_left_ticks 
 
 	# Compute x and y position of wheelchair assuming differential drive	
 	# Important: d_theta and theta are in radians
@@ -204,8 +178,6 @@ def compute_position_from_odometry():
 	d_y = d_s * math.sin(theta + (d_theta/2.0))
 
 	"""
-	theta += d_theta
-
 	# Convert theta and d_theta to degrees
 	d_x = d_s * math.cos(math.degrees(theta) + (math.degrees(d_theta)/2.0))
 	d_y = d_s * math.sin(math.degrees(theta) + (math.degrees(d_theta)/2.0))
@@ -214,6 +186,7 @@ def compute_position_from_odometry():
 	x += d_x
 	y += d_y	
 
+	#print "Vehicle position (theta in deg): ", x, y, math.degrees(theta)
 	# update system	
 	last_right_ticks = right_ticks
 	last_left_ticks = left_ticks
