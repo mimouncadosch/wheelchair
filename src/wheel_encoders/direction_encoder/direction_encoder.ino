@@ -53,7 +53,7 @@ void loop() {
 //    if (readSensor(analogPinC) == LOW) {
 //      revsRight--;
 //    } else {
-//      revsRight++;
+//      revsxRight++;
 //    }
 ////    Serial.print("right: ");
 ////    Serial.println(revsRight);

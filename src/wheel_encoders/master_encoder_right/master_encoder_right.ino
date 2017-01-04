@@ -5,10 +5,8 @@ This program combines readings from the speed and direction encoders to provide 
 // Global variables
 int pinA = A0;
 int ticksRight = 0;
-int pinB = A2;
-int pinC = A1;
-int dir;
-int last_dir = 1;
+int ticksLeft = 0;
+int pinB = A3;
 
 int n;
 int last_n = LOW;
@@ -58,6 +56,7 @@ class DirectionEncoder {
 };
 
 DirectionEncoder de_right = DirectionEncoder(A2, A1);
+DirectionEncoder de_left = DirectionEncoder(A4, A5);
 
 
 void setup() {
@@ -66,9 +65,12 @@ void setup() {
 
 int compensationTicks = 20;
 int compensatedRight = false;  // This boolean variable indicates whether the speed encoder has been compensated for the delay in the direction encoder.
+int compensatedLeft = false;
+
 void loop() {
   
       de_right.update();
+      de_left.update();
 
        // Check if change in direction right wheel
       if (de_right.dir != de_right.last_dir && compensatedRight == false) {
@@ -78,8 +80,14 @@ void loop() {
           compensatedRight = true;
       }
       compensatedRight = false;
+      if (de_left.dir != de_left.last_dir && compensatedLeft == false) {
+//          Serial.println("Change in direction");
+          de_left.last_dir = de_left.dir;
+          ticksLeft -= compensationTicks;
+          compensatedLeft = true;
+      }
       
-//      // Count wheel ticks
+      // Count wheel ticks right
       n = readSensor(pinA, 4.0);
       if (n != last_n) {
           ticksRight += 1 * de_right.dir;
@@ -87,5 +95,14 @@ void loop() {
           Serial.println(ticksRight);
           last_n = n;
       }
+      
+      n2 = readSensor(pinB, 4.0);
+      if (n2 != last_n2) {
+          ticksLeft += 1 * de_left.dir;
+          Serial.print("left: ");
+          Serial.println(ticksLeft);
+          last_n2 = n2;
+      }
+      
       
 }
