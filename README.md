@@ -1,4 +1,4 @@
-#Wheel Encoding Using Arduino, Photointerrupters and IR Sensor circuits
+### Wheel Encoding Using Arduino, Photointerrupters and IR Sensor circuits
 
 -> 20 degree (34 revolution) error when changing direction.
 -> Large, but only changing direction in curves, so not that bad. 
@@ -7,8 +7,8 @@
 -> Drive very slowly, very very slowly.
 
 
+### Some math:
 
-Some math:
 514 counts / rev
 
 If 1 rev / sec:
@@ -19,7 +19,7 @@ If 2 rev / sec:
 	2/514 ~= 4 ms per count
 Mode 3: 1 rev / sec
 
-Can Arduino count all the 514:
+### Can Arduino count all the 514:
 - single thread:
 	* loop, no delay: counts all when rotating very fast.
 	* loop, delay(0.1): counts all when rotating very fast.
@@ -29,7 +29,7 @@ Can Arduino count all the 514:
 	* loop, direction and speed encoders, one wheel: counts all when rotating slowly.
 
 
-# LEARN TO DO THINGS WELL: TIME FUNCTIONS
+# TIME FUNCTIONS
 
 * Photointerrupter response time: max 15 micros 
 (https://www.sparkfun.com/datasheets/Components/GP1A57HRJ00F.pdf)
