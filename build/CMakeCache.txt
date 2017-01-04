@@ -17,6 +17,24 @@
 //Build shared libraries (DLLs).
 BUILD_SHARED_LIBS:BOOL=ON
 
+//The directory containing a CMake configuration file for Boost.
+Boost_DIR:PATH=Boost_DIR-NOTFOUND
+
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
+//Boost library directory
+Boost_LIBRARY_DIRS:FILEPATH=/usr/lib
+
+//The Boost SIGNALS library
+Boost_SIGNALS_LIBRARY:FILEPATH=/usr/lib/libboost_signals-mt.so
+
+//Boost signals library (debug)
+Boost_SIGNALS_LIBRARY_DEBUG:FILEPATH=/usr/lib/libboost_signals-mt.so
+
+//Boost signals library (release)
+Boost_SIGNALS_LIBRARY_RELEASE:FILEPATH=/usr/lib/libboost_signals-mt.so
+
 //List of ';' separated packages to exclude
 CATKIN_BLACKLIST_PACKAGES:STRING=
 
@@ -179,6 +197,15 @@ DOXYGEN_EXECUTABLE:FILEPATH=/usr/bin/doxygen
 //Doxygen found
 DOXYGEN_FOUND:BOOL=TRUE
 
+//Dependencies for the target
+DepthImageToLaserScanNodelet_LIB_DEPENDS:STATIC=general;DepthImageToLaserScanROS;general;/opt/ros/hydro/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/hydro/lib/libimage_geometry.so;general;/opt/ros/hydro/lib/libopencv_videostab.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_video.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_superres.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_stitching.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_photo.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ocl.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_objdetect.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_nonfree.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ml.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_legacy.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_imgproc.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_highgui.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_gpu.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_flann.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_features2d.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_core.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_contrib.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_calib3d.so.2.4.9;general;/opt/ros/hydro/lib/libimage_transport.so;general;/opt/ros/hydro/lib/libmessage_filters.so;general;/opt/ros/hydro/lib/libnodeletlib.so;general;/opt/ros/hydro/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/usr/lib/libtinyxml.so;general;/opt/ros/hydro/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/hydro/lib/libroslib.so;general;/opt/ros/hydro/lib/libroscpp.so;general;/usr/lib/libboost_signals-mt.so;general;/usr/lib/libboost_filesystem-mt.so;general;/opt/ros/hydro/lib/librosconsole.so;general;/opt/ros/hydro/lib/librosconsole_log4cxx.so;general;/opt/ros/hydro/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/libboost_regex-mt.so;general;/opt/ros/hydro/lib/libxmlrpcpp.so;general;/opt/ros/hydro/lib/libroscpp_serialization.so;general;/opt/ros/hydro/lib/librostime.so;general;/usr/lib/libboost_date_time-mt.so;general;/usr/lib/libboost_system-mt.so;general;/usr/lib/libboost_thread-mt.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/opt/ros/hydro/lib/libcpp_common.so;general;/opt/ros/hydro/lib/libconsole_bridge.so;
+
+//Dependencies for the target
+DepthImageToLaserScanROS_LIB_DEPENDS:STATIC=general;DepthImageToLaserScan;general;/opt/ros/hydro/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/hydro/lib/libimage_geometry.so;general;/opt/ros/hydro/lib/libopencv_videostab.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_video.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_superres.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_stitching.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_photo.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ocl.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_objdetect.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_nonfree.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ml.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_legacy.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_imgproc.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_highgui.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_gpu.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_flann.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_features2d.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_core.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_contrib.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_calib3d.so.2.4.9;general;/opt/ros/hydro/lib/libimage_transport.so;general;/opt/ros/hydro/lib/libmessage_filters.so;general;/opt/ros/hydro/lib/libnodeletlib.so;general;/opt/ros/hydro/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/usr/lib/libtinyxml.so;general;/opt/ros/hydro/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/hydro/lib/libroslib.so;general;/opt/ros/hydro/lib/libroscpp.so;general;/usr/lib/libboost_signals-mt.so;general;/usr/lib/libboost_filesystem-mt.so;general;/opt/ros/hydro/lib/librosconsole.so;general;/opt/ros/hydro/lib/librosconsole_log4cxx.so;general;/opt/ros/hydro/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/libboost_regex-mt.so;general;/opt/ros/hydro/lib/libxmlrpcpp.so;general;/opt/ros/hydro/lib/libroscpp_serialization.so;general;/opt/ros/hydro/lib/librostime.so;general;/usr/lib/libboost_date_time-mt.so;general;/usr/lib/libboost_system-mt.so;general;/usr/lib/libboost_thread-mt.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/opt/ros/hydro/lib/libcpp_common.so;general;/opt/ros/hydro/lib/libconsole_bridge.so;
+
+//Dependencies for the target
+DepthImageToLaserScan_LIB_DEPENDS:STATIC=general;/opt/ros/hydro/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/hydro/lib/libimage_geometry.so;general;/opt/ros/hydro/lib/libopencv_videostab.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_video.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_superres.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_stitching.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_photo.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ocl.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_objdetect.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_nonfree.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_ml.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_legacy.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_imgproc.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_highgui.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_gpu.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_flann.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_features2d.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_core.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_contrib.so.2.4.9;general;/opt/ros/hydro/lib/libopencv_calib3d.so.2.4.9;general;/opt/ros/hydro/lib/libimage_transport.so;general;/opt/ros/hydro/lib/libmessage_filters.so;general;/opt/ros/hydro/lib/libnodeletlib.so;general;/opt/ros/hydro/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/usr/lib/libtinyxml.so;general;/opt/ros/hydro/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/hydro/lib/libroslib.so;general;/opt/ros/hydro/lib/libroscpp.so;general;/usr/lib/libboost_signals-mt.so;general;/usr/lib/libboost_filesystem-mt.so;general;/opt/ros/hydro/lib/librosconsole.so;general;/opt/ros/hydro/lib/librosconsole_log4cxx.so;general;/opt/ros/hydro/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/libboost_regex-mt.so;general;/opt/ros/hydro/lib/libxmlrpcpp.so;general;/opt/ros/hydro/lib/libroscpp_serialization.so;general;/opt/ros/hydro/lib/librostime.so;general;/usr/lib/libboost_date_time-mt.so;general;/usr/lib/libboost_system-mt.so;general;/usr/lib/libboost_thread-mt.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/opt/ros/hydro/lib/libcpp_common.so;general;/opt/ros/hydro/lib/libconsole_bridge.so;
+
 //Path to a program.
 EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
 
@@ -236,8 +263,59 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 //Path to a file.
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
+//Path to a file.
+_file_name:FILEPATH=/home/rbtying/finalize_wheelchair/src/slam_gmapping/gmapping/test/basic_localization_laser_different_beamcount.test
+
+//The directory containing a CMake configuration file for actionlib.
+actionlib_DIR:PATH=/opt/ros/hydro/share/actionlib/cmake
+
+//The directory containing a CMake configuration file for actionlib_msgs.
+actionlib_msgs_DIR:PATH=/opt/ros/hydro/share/actionlib_msgs/cmake
+
+//The directory containing a CMake configuration file for bond.
+bond_DIR:PATH=/opt/ros/hydro/share/bond/cmake
+
+//The directory containing a CMake configuration file for bondcpp.
+bondcpp_DIR:PATH=/opt/ros/hydro/share/bondcpp/cmake
+
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/hydro/share/catkin/cmake
+
+//The directory containing a CMake configuration file for class_loader.
+class_loader_DIR:PATH=/opt/ros/hydro/share/class_loader/cmake
+
+//The directory containing a CMake configuration file for cpp_common.
+cpp_common_DIR:PATH=/opt/ros/hydro/share/cpp_common/cmake
+
+//Value Computed by CMake
+depthimage_to_laserscan_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/depthimage_to_laserscan
+
+//Value Computed by CMake
+depthimage_to_laserscan_SOURCE_DIR:STATIC=/home/rbtying/finalize_wheelchair/src/depthimage_to_laserscan
+
+//The directory containing a CMake configuration file for dynamic_reconfigure.
+dynamic_reconfigure_DIR:PATH=/opt/ros/hydro/share/dynamic_reconfigure/cmake
+
+//The directory containing a CMake configuration file for gencpp.
+gencpp_DIR:PATH=/opt/ros/hydro/share/gencpp/cmake
+
+//The directory containing a CMake configuration file for genlisp.
+genlisp_DIR:PATH=/opt/ros/hydro/share/genlisp/cmake
+
+//The directory containing a CMake configuration file for genmsg.
+genmsg_DIR:PATH=/opt/ros/hydro/share/genmsg/cmake
+
+//The directory containing a CMake configuration file for genpy.
+genpy_DIR:PATH=/opt/ros/hydro/share/genpy/cmake
+
+//The directory containing a CMake configuration file for geometry_msgs.
+geometry_msgs_DIR:PATH=/opt/ros/hydro/share/geometry_msgs/cmake
+
+//Value Computed by CMake
+gmapping_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/slam_gmapping/gmapping
+
+//Value Computed by CMake
+gmapping_SOURCE_DIR:STATIC=/home/rbtying/finalize_wheelchair/src/slam_gmapping/gmapping
 
 //Value Computed by CMake
 gtest_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/gtest
@@ -264,11 +342,89 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//The directory containing a CMake configuration file for image_geometry.
+image_geometry_DIR:PATH=/opt/ros/hydro/share/image_geometry/cmake
+
+//The directory containing a CMake configuration file for image_transport.
+image_transport_DIR:PATH=/opt/ros/hydro/share/image_transport/cmake
+
+//Path to a library.
+lib:FILEPATH=/opt/ros/hydro/lib/librosbag_storage.so
+
+//The directory containing a CMake configuration file for message_filters.
+message_filters_DIR:PATH=/opt/ros/hydro/share/message_filters/cmake
+
+//The directory containing a CMake configuration file for message_generation.
+message_generation_DIR:PATH=/opt/ros/hydro/share/message_generation/cmake
+
+//The directory containing a CMake configuration file for message_runtime.
+message_runtime_DIR:PATH=/opt/ros/hydro/share/message_runtime/cmake
+
+//The directory containing a CMake configuration file for nav_msgs.
+nav_msgs_DIR:PATH=/opt/ros/hydro/share/nav_msgs/cmake
+
+//The directory containing a CMake configuration file for nodelet.
+nodelet_DIR:PATH=/opt/ros/hydro/share/nodelet/cmake
+
 //Value Computed by CMake
 odometry_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/odometry
 
 //Value Computed by CMake
 odometry_SOURCE_DIR:STATIC=/home/rbtying/finalize_wheelchair/src/odometry
+
+//The directory containing a CMake configuration file for openslam_gmapping.
+openslam_gmapping_DIR:PATH=/opt/ros/hydro/share/openslam_gmapping/cmake
+
+//The directory containing a CMake configuration file for pluginlib.
+pluginlib_DIR:PATH=/opt/ros/hydro/share/pluginlib/cmake
+
+//The directory containing a CMake configuration file for rosbag_storage.
+rosbag_storage_DIR:PATH=/opt/ros/hydro/share/rosbag_storage/cmake
+
+//The directory containing a CMake configuration file for rosconsole.
+rosconsole_DIR:PATH=/opt/ros/hydro/share/rosconsole/cmake
+
+//The directory containing a CMake configuration file for roscpp.
+roscpp_DIR:PATH=/opt/ros/hydro/share/roscpp/cmake
+
+//The directory containing a CMake configuration file for roscpp_serialization.
+roscpp_serialization_DIR:PATH=/opt/ros/hydro/share/roscpp_serialization/cmake
+
+//The directory containing a CMake configuration file for roscpp_traits.
+roscpp_traits_DIR:PATH=/opt/ros/hydro/share/roscpp_traits/cmake
+
+//The directory containing a CMake configuration file for rosgraph.
+rosgraph_DIR:PATH=/opt/ros/hydro/share/rosgraph/cmake
+
+//The directory containing a CMake configuration file for rosgraph_msgs.
+rosgraph_msgs_DIR:PATH=/opt/ros/hydro/share/rosgraph_msgs/cmake
+
+//The directory containing a CMake configuration file for roslib.
+roslib_DIR:PATH=/opt/ros/hydro/share/roslib/cmake
+
+//The directory containing a CMake configuration file for rospy.
+rospy_DIR:PATH=/opt/ros/hydro/share/rospy/cmake
+
+//The directory containing a CMake configuration file for rostest.
+rostest_DIR:PATH=/opt/ros/hydro/share/rostest/cmake
+
+//The directory containing a CMake configuration file for rostime.
+rostime_DIR:PATH=/opt/ros/hydro/share/rostime/cmake
+
+//The directory containing a CMake configuration file for sensor_msgs.
+sensor_msgs_DIR:PATH=/opt/ros/hydro/share/sensor_msgs/cmake
+
+//Value Computed by CMake
+slam_gmapping_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/slam_gmapping/slam_gmapping
+
+//Value Computed by CMake
+slam_gmapping_SOURCE_DIR:STATIC=/home/rbtying/finalize_wheelchair/src/slam_gmapping/slam_gmapping
+
+//The directory containing a CMake configuration file for smclib.
+smclib_DIR:PATH=/opt/ros/hydro/share/smclib/cmake
+
+//The directory containing a CMake configuration file for std_msgs.
+std_msgs_DIR:PATH=/opt/ros/hydro/share/std_msgs/cmake
 
 //Value Computed by CMake
 system_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/system
@@ -276,11 +432,45 @@ system_BINARY_DIR:STATIC=/home/rbtying/finalize_wheelchair/build/system
 //Value Computed by CMake
 system_SOURCE_DIR:STATIC=/home/rbtying/finalize_wheelchair/src/system
 
+//The directory containing a CMake configuration file for tf2.
+tf2_DIR:PATH=/opt/ros/hydro/share/tf2/cmake
+
+//The directory containing a CMake configuration file for tf2_msgs.
+tf2_msgs_DIR:PATH=/opt/ros/hydro/share/tf2_msgs/cmake
+
+//The directory containing a CMake configuration file for tf2_py.
+tf2_py_DIR:PATH=/opt/ros/hydro/share/tf2_py/cmake
+
+//The directory containing a CMake configuration file for tf2_ros.
+tf2_ros_DIR:PATH=/opt/ros/hydro/share/tf2_ros/cmake
+
+//The directory containing a CMake configuration file for tf.
+tf_DIR:PATH=/opt/ros/hydro/share/tf/cmake
+
+//The directory containing a CMake configuration file for xmlrpcpp.
+xmlrpcpp_DIR:PATH=/opt/ros/hydro/share/xmlrpcpp/cmake
+
 
 ########################
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LIBRARY_DIRS
+Boost_LIBRARY_DIRS-ADVANCED:INTERNAL=1
+//The library version string for boost libraries
+Boost_LIB_VERSION:INTERNAL=1_49
+//Whether the Boost SIGNALS library found
+Boost_SIGNALS_FOUND:INTERNAL=ON
+//ADVANCED property for variable: Boost_SIGNALS_LIBRARY
+Boost_SIGNALS_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_SIGNALS_LIBRARY_DEBUG
+Boost_SIGNALS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_SIGNALS_LIBRARY_RELEASE
+Boost_SIGNALS_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//The version number for boost libraries
+Boost_VERSION:INTERNAL=104900
 //catkin environment
 CATKIN_ENV:INTERNAL=/home/rbtying/finalize_wheelchair/build/catkin_generated/env_cached.sh
 CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/rbtying/finalize_wheelchair/build/test_results
@@ -378,7 +568,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

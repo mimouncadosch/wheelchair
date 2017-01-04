@@ -218,16 +218,22 @@ def check_raw_vals(raw_vals):
 	if not parsed_vals: 
 		return False
 	# If wrong number of arguments found
-	elif len(parsed_vals[0]) != 4:
+	elif len(parsed_vals[0]) != 2:
 		return False
 	# If correct number of arguments found
-	elif len(parsed_vals[0]) == 4:
+	elif len(parsed_vals[0]) == 2:
 		return True
 	
 def parse_vals(raw_vals):
-	parsed_vals = re.findall("(right):\s(-?[0-9]+)\t(left):\s(-?[0-9]+)", raw_vals)[0]
-	right_ticks = int(parsed_vals[1])
-	left_ticks = int(parsed_vals[3])
+	global last_right_ticks, last_left_ticks
+	parsed_vals = re.findall("(right|left):\s(-?[0-9]+)", raw_vals)[0]
+	if parsed_vals[0] == "left":
+		left_ticks = int(parsed_vals[1])
+		right_ticks = last_right_ticks
+	elif parsed_vals[0] == "right":
+		right_ticks = int(parsed_vals[1])
+		left_ticks = last_left_ticks
+
 	return right_ticks, left_ticks 
 
 if __name__ == '__main__':
